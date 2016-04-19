@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Concrete platform</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Open+Sans&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet/less" href="style.less" type="text/css" />
+  <script src="less.min.js"></script>
+  <style type="text/css">
+  [ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+  </style>
+</head>
+
+<body ng-app="myApp">
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="#">Concrete Platform</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Главная</a></li>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><i class="fa fa-user-plus"></i> Регистрация</a></li>
+          <li><a href="#"><i class="fa fa-user"></i> Войти</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row" ng-controller="mainController">
+      <h2>Search github profile</h2>
+      <div id="custom-search-input">
+        <form class="navbar-form" role="search" style="border:none;">
+          <div class="input-group col-md-12">
+            <input type="text" ng-model='search' ng-list=", " id="searchbox" class="search-query form-control" placeholder="Search and let the magic happen" ng-model-options="{debounce: 300}" ng-change="findGithubUser()" />
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button">
+                <span class=" glyphicon glyphicon-search" ng-click="newFunc()"></span></button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <div class="row" ng-cloak>
+        <div ng-repeat="(key, value) in useNameStars" class="col-lg-2" style="padding-top:20px;" ng-cloak id="content">
+          {{key+': '+value+ ' Stars'}}
+        </div>
+        <div ng-cloak ng-repeat="item in userInfo" class="col-lg-2" style="padding-top:20px;" id="content">
+          <p ng-repeat="i in item | orderBy:'-stargazers_count'">
+            {{'Owner: '+i.owner.login}}<br> {{'Name: '+i.name}}<br> {{'ID: '+i.id}}<br> {{'Stars: '+i.stargazers_count}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <h3></h3>
+        <div ng-cloak ng-show='search.length===1' ng-repeat="item in repos | orderBy:'-stargazers_count'" class="col-lg-2" style="padding-top:20px;" id="content">
+          <p>{{'Name: '+item.name}}</p>
+          <p>{{'ID: '+item.id}}</p>
+          <p>{{'Stars: '+item.stargazers_count}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+  <script src="app.js" type="text/javascript" charset="utf-8"></script>
+  <script src="controllers.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+
+</html>
+</body>
+
+</html>
